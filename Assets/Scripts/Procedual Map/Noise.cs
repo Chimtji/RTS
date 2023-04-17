@@ -96,16 +96,16 @@ public class NoiseSettings
     public Noise.NormalizeMode normalizeMode;
     public float scale = 50;
 
-    [Range(0, 10)]
+
     public int octaves = 6;
 
     [Range(0, 1)]
     public float persistance = 0.6f;
 
-    [Range(1, 20)]
+
     public float lacunarity = 2;
 
-    [Range(0, 20)]
+
     public int seed;
     public Vector2 offset;
 

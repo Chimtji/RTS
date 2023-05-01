@@ -20,7 +20,7 @@ public class MapGenerator : MonoBehaviour
 
     public void Generate()
     {
-        ChunkMap chunkMap = new ChunkMap(3, terrainSettings.heightMapSettings);
+        ChunkMap chunkMap = new ChunkMap(1, terrainSettings.heightMapSettings);
 
         MeshGenerator meshGenerator = new MeshGenerator();
         ObjectGenerator objectGenerator = new ObjectGenerator();

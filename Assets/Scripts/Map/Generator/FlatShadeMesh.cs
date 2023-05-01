@@ -43,7 +43,7 @@ public class FlatShadeMesh
         else
         {
             vertices[vertexIndex] = vertexPosition;
-            uvs[vertexIndex] = uv;
+            uvs[vertexIndex] = new Vector2(0, vertexPosition.y);
         }
     }
 

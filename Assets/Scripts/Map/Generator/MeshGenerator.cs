@@ -23,8 +23,8 @@ public class MeshGenerator
         Utils.ClearChildren(container);
         CreateChunkMesh(meshName, chunkMap);
 
-        ApplyToMaterial(terrainSettings.textureLayers);
-        UpdateMeshHeights(terrainSettings.heightMapSettings.minHeight, terrainSettings.heightMapSettings.maxHeight);
+        // ApplyToMaterial(terrainSettings.textureLayers);
+        // UpdateMeshHeights(terrainSettings.heightMapSettings.minHeight, terrainSettings.heightMapSettings.maxHeight);
 
 
     }

@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: Test Terrain Settings
   m_EditorClassIdentifier: 
   autoUpdate: 1
-  material: {fileID: 2100000, guid: 7b9e52e6ec1074772906f2d56f479914, type: 2}
+  material: {fileID: 2100000, guid: ec39889a8cf3741de9c2bb61a4a102a8, type: 2}
   heightMapSettings:
     noiseSettings:
-      scale: 30
-      octaves: 6
-      persistance: 0.587
-      lacunarity: 2
-      seed: 0
+      scale: 50
+      octaves: 4
+      persistance: 0.584
+      lacunarity: 2.3
+      seed: 28
       offset: {x: 0, y: 0}
     useFalloff: 0
-    heightMultiplier: 30
+    heightMultiplier: 37.42
     heightCurve:
       serializedVersion: 2
       m_Curve:
@@ -37,8 +37,26 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 1
-        value: 1
+        time: 0.05835919
+        value: 0.51985
+        inSlope: 0.04257849
+        outSlope: 0.04257849
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.2582651
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.3760235
+        value: 0.19760959
+        inSlope: 0.07566949
+        outSlope: 0.07566949
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.23756829
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9896654
+        value: 1.1079862
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -49,43 +67,43 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   textureLayers:
-  - texture: {fileID: 2800000, guid: fb78630de234648e9970c69fa14d7e6b, type: 3}
+  - texture: {fileID: 2800000, guid: 5cad7fae60f184db294289a83cf745fd, type: 3}
     tint: {r: 0.36966002, g: 0.46418697, b: 0.6698113, a: 0}
     tintStrength: 0.7
     startHeight: 0
     blendStrength: 0
     textureScale: 1
-  - texture: {fileID: 2800000, guid: b9eed8707b0f34af0a9a8aea395eda59, type: 3}
+  - texture: {fileID: 2800000, guid: 914d19f3f72934e8889328d1f29ecba3, type: 3}
     tint: {r: 0.38527945, g: 0.5903753, b: 0.6981132, a: 0}
     tintStrength: 0.7
     startHeight: 0.01
     blendStrength: 0
     textureScale: 1
-  - texture: {fileID: 2800000, guid: b9eed8707b0f34af0a9a8aea395eda59, type: 3}
+  - texture: {fileID: 2800000, guid: 914d19f3f72934e8889328d1f29ecba3, type: 3}
     tint: {r: 0.84288514, g: 0.8490566, b: 0.6688323, a: 0}
     tintStrength: 0.7
     startHeight: 0.02
     blendStrength: 0
     textureScale: 1
-  - texture: {fileID: 2800000, guid: b9eed8707b0f34af0a9a8aea395eda59, type: 3}
+  - texture: {fileID: 2800000, guid: 914d19f3f72934e8889328d1f29ecba3, type: 3}
     tint: {r: 0.4432543, g: 0.6603774, b: 0.42052332, a: 0}
     tintStrength: 0.7
     startHeight: 0.03
     blendStrength: 0
     textureScale: 1
-  - texture: {fileID: 2800000, guid: b9eed8707b0f34af0a9a8aea395eda59, type: 3}
+  - texture: {fileID: 2800000, guid: 914d19f3f72934e8889328d1f29ecba3, type: 3}
     tint: {r: 0.5188679, g: 0.43197635, b: 0.3255162, a: 0}
     tintStrength: 0.7
     startHeight: 0.06
     blendStrength: 0
     textureScale: 1
-  - texture: {fileID: 2800000, guid: b9eed8707b0f34af0a9a8aea395eda59, type: 3}
+  - texture: {fileID: 2800000, guid: 914d19f3f72934e8889328d1f29ecba3, type: 3}
     tint: {r: 0.3962264, g: 0.31480858, b: 0.24483803, a: 0}
     tintStrength: 0.7
     startHeight: 0.13
     blendStrength: 0
     textureScale: 1
-  - texture: {fileID: 2800000, guid: b9eed8707b0f34af0a9a8aea395eda59, type: 3}
+  - texture: {fileID: 2800000, guid: 914d19f3f72934e8889328d1f29ecba3, type: 3}
     tint: {r: 0.8962264, g: 0.8962264, b: 0.8962264, a: 0}
     tintStrength: 0.7
     startHeight: 0.25

@@ -1,31 +1,30 @@
 using UnityEngine;
 using System.Collections;
+using Trout.Utils;
 
 public class ChunkMesh
 {
     public Mesh mesh;
     public ChunkMesh(Chunk chunk)
     {
-        int borderedSize = chunk.heightMap.values.GetLength(0);
-        int meshSize = borderedSize - 2;
-        int meshSizeUnsimplified = borderedSize - 2;
+        int meshSize = chunk.size;
 
-        float topLeftX = (meshSizeUnsimplified - 1) / -2f;
-        float topLeftZ = (meshSizeUnsimplified - 1) / 2f;
+        float topLeftX = (meshSize - 1) / -2f;
+        float topLeftZ = (meshSize - 1) / 2f;
 
-        int verticesPerLine = (meshSize - 1) / 1 + 1;
+        int verticesPerLine = (meshSize) / 1 + 1;
 
         FlatShadeMesh flatShadeMesh = new FlatShadeMesh(verticesPerLine);
 
-        int[,] vertexIndicesMap = new int[borderedSize, borderedSize];
+        int[,] vertexIndicesMap = new int[meshSize, meshSize];
         int meshVertexIndex = 0;
         int borderVertexIndex = -1;
 
-        for (int z = 0; z < borderedSize; z++)
+        for (int z = 0; z < meshSize; z++)
         {
-            for (int x = 0; x < borderedSize; x++)
+            for (int x = 0; x < meshSize; x++)
             {
-                bool isBorderVertex = z == 0 || z == borderedSize - 1 || x == 0 || x == borderedSize - 1;
+                bool isBorderVertex = z == 0 || z == meshSize - 1 || x == 0 || x == meshSize - 1;
 
                 if (isBorderVertex)
                 {
@@ -40,27 +39,27 @@ public class ChunkMesh
             }
         }
 
-        for (int z = 0; z < borderedSize; z++)
+        for (int z = 0; z < meshSize; z++)
         {
-            for (int x = 0; x < borderedSize; x++)
+            for (int x = 0; x < meshSize; x++)
             {
                 int vertexIndex = vertexIndicesMap[x, z];
-                Vector2 percent = new Vector2((x - 1) / (float)meshSize, (z - 1) / (float)meshSize);
+                Vector2 percent = new Vector2(x / (float)meshSize, z / (float)meshSize);
                 float height = chunk.heightMap.values[x, z];
 
-                float coordX = (topLeftX + percent.x * meshSizeUnsimplified) * chunk.scale;
+                float coordX = (topLeftX + percent.x * meshSize) * chunk.scale;
                 float coordY = height;
-                float coordZ = (topLeftZ - percent.y * meshSizeUnsimplified) * chunk.scale;
+                float coordZ = (topLeftZ - percent.y * meshSize) * chunk.scale;
                 Vector3 vertexPosition = new Vector3(coordX, coordY, coordZ);
 
                 if (chunk.edgeType != Edge.None)
                 {
-                    vertexPosition = GetEdgePosition(chunk.edgeType, x, z, borderedSize, vertexPosition, chunk.edgeDepth);
+                    // vertexPosition = GetEdgePosition(chunk.edgeType, x, z, meshSize, vertexPosition, chunk.edgeDepth);
                 }
 
                 flatShadeMesh.AddVertex(vertexPosition, percent, vertexIndex);
 
-                if (x < borderedSize - 1 && z < borderedSize - 1)
+                if (x < meshSize - 1 && z < meshSize - 1)
                 {
                     int a = vertexIndicesMap[x, z];
                     int b = vertexIndicesMap[x + 1, z];
@@ -82,22 +81,22 @@ public class ChunkMesh
     {
 
         Vector3 modifiedPosition = new Vector3(position.x, position.y, position.z);
-        if ((edge == Edge.Top || edge == Edge.TopLeft || edge == Edge.TopRight) && IsLeftOrTopEdge(z, mapSize))
+        if ((edge == Edge.Top || edge == Edge.TopLeft || edge == Edge.TopRight || edge == Edge.All) && IsLeftOrTopEdge(z, mapSize))
         {
             modifiedPosition.y = -edgeHeight;
             modifiedPosition.z = modifiedPosition.z - 1f;
         }
-        if ((edge == Edge.Bottom || edge == Edge.BottomRight || edge == Edge.BottomLeft) && IsRightOrBottomEdge(z, mapSize))
+        if ((edge == Edge.Bottom || edge == Edge.BottomRight || edge == Edge.BottomLeft || edge == Edge.All) && IsRightOrBottomEdge(z, mapSize))
         {
             modifiedPosition.y = -edgeHeight;
             modifiedPosition.z = modifiedPosition.z + 1f;
         }
-        if ((edge == Edge.Left || edge == Edge.TopLeft || edge == Edge.BottomLeft) && IsLeftOrTopEdge(x, mapSize))
+        if ((edge == Edge.Left || edge == Edge.TopLeft || edge == Edge.BottomLeft || edge == Edge.All) && IsLeftOrTopEdge(x, mapSize))
         {
             modifiedPosition.y = -edgeHeight;
             modifiedPosition.x = modifiedPosition.x + 1f;
         }
-        if ((edge == Edge.Right || edge == Edge.TopRight || edge == Edge.BottomRight) && IsRightOrBottomEdge(x, mapSize))
+        if ((edge == Edge.Right || edge == Edge.TopRight || edge == Edge.BottomRight || edge == Edge.All) && IsRightOrBottomEdge(x, mapSize))
         {
             modifiedPosition.y = -edgeHeight;
             modifiedPosition.x = modifiedPosition.x - 1f;
@@ -125,3 +124,9 @@ public class ChunkMesh
     }
 
 }
+
+
+// 4 chunks
+// total length 141
+// middle 47
+

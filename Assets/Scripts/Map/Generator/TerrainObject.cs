@@ -1,14 +1,15 @@
 using UnityEngine;
 
 [CreateAssetMenu()]
-public class TerrainObject : ScriptableObject
+public class TerrainObject : UpdatableData
 {
     public GameObject prefab;
-    public Transform container;
+    public string containerName;
 
-    // spawn density
+    public float maxSpawnHeight;
 
-    // spawn noise map
+    public float minSpawnHeight;
 
+    public NoiseSettings noiseSettings;
 
 }

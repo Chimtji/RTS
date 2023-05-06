@@ -15,5 +15,26 @@ namespace Trout.Utils
             }
         }
 
+        public static void RemoveObject(string name)
+        {
+            GameObject.DestroyImmediate(GameObject.Find("/MapGenerator/" + name));
+        }
+
+        public static void Log<T>(string text, T value)
+        {
+            Debug.Log(text + ": " + value);
+        }
+
+        public static float GetAvegerage(float[] values)
+        {
+            float avg = 0;
+            foreach (float val in values)
+            {
+                avg += val;
+            };
+
+            return avg /= values.Length;
+        }
+
     }
 }

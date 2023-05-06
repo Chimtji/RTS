@@ -25,9 +25,17 @@ public class ChunkMap
 
     public Dictionary<Vector2, Chunk> chunks = new Dictionary<Vector2, Chunk>();
 
+    public float GRIDSIZE
+    {
+        get
+        {
+            return (CHUNKSIZE - 3) * CHUNKSCALE;
+        }
+    }
+
     public ChunkMap(int mapSize, HeightMapSettings heightMapSettings)
     {
-        this.mapSize = mapSize;
+        this.mapSize = mapSize - 1;
         this.heightMapSettings = heightMapSettings;
         CreateChunkList();
     }
@@ -43,18 +51,16 @@ public class ChunkMap
             {
                 Vector2 position = new Vector2(x, z);
                 Edge edgeType = GetEdgeType(x, z);
+
+                if (mapSize == 0)
+                {
+                    edgeType = Edge.All;
+                }
+
                 Chunk chunk = CreateChunk(position, edgeType);
                 chunks.Add(position, chunk);
             }
         }
-    }
-
-    /// <summary>
-    /// Returns the CHUNKSIZE converted to world size.
-    /// </summary>
-    public float GetChunkWorldSize()
-    {
-        return (CHUNKSIZE - 3) * CHUNKSCALE;
     }
 
     /// <summary>
@@ -64,13 +70,13 @@ public class ChunkMap
     /// <param name="edgeType">the edge type of the chunk</param>
     private Chunk CreateChunk(Vector2 position, Edge edgeType)
     {
-        Vector2 chunkWorldPos = position * GetChunkWorldSize();
+        Vector2 chunkWorldPos = position * GRIDSIZE;
         Vector2 chunkCenterWorldPosition = chunkWorldPos / CHUNKSCALE;
 
         HeightMap heightMap = new HeightMap(CHUNKSIZE, heightMapSettings, chunkCenterWorldPosition);
 
-        Bounds bounds = new Bounds(chunkCenterWorldPosition, Vector2.one * GetChunkWorldSize());
-        Chunk chunk = new Chunk(chunkCenterWorldPosition, position, heightMap, edgeType, bounds, CHUNKSIZE, CHUNKSCALE, EDGEDEPTH);
+        Bounds bounds = new Bounds(chunkCenterWorldPosition, Vector2.one * GRIDSIZE);
+        Chunk chunk = new Chunk(chunkCenterWorldPosition, position, heightMap, edgeType, bounds, CHUNKSIZE, CHUNKSCALE, EDGEDEPTH, GRIDSIZE);
         return chunk;
 
     }

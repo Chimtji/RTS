@@ -71,25 +71,12 @@ public class NoiseMap
                 }
                 noiseMap[x, y] = noiseHeight;
 
-                // if (settings.normalizeMode == NormalizeMode.Global)
-                // {
                 float normalizedHeight = (noiseMap[x, y] + 1) / (maxPossibleHeight / 0.9f);
                 noiseMap[x, y] = Mathf.Clamp(normalizedHeight, 0, int.MaxValue);
 
-                // }
+
             }
         }
-
-        // if (settings.normalizeMode == NormalizeMode.Local)
-        // {
-        //     for (int y = 0; y < size; y++)
-        //     {
-        //         for (int x = 0; x < size; x++)
-        //         {
-        //             noiseMap[x, y] = Mathf.InverseLerp(minLocalNoiseHeight, maxLocalNoiseHeight, noiseMap[x, y]);
-        //         }
-        //     }
-        // }
 
         values = noiseMap;
     }

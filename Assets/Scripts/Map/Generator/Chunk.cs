@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
+using Trout.Utils;
+using System.Linq;
 
 public class Chunk
 {
@@ -34,9 +37,11 @@ public class Chunk
     /// </summary>
     public float edgeDepth;
 
+    public Mesh mesh;
     Bounds bounds;
+    public float gridSize;
 
-    public Chunk(Vector2 worldPosition, Vector2 chunkPosition, HeightMap heightMap, Edge edgeType, Bounds bounds, int size, float scale, float edgeDepth)
+    public Chunk(Vector2 worldPosition, Vector2 chunkPosition, HeightMap heightMap, Edge edgeType, Bounds bounds, int size, float scale, float edgeDepth, float gridSize)
     {
         this.worldPosition = worldPosition;
         this.chunkPosition = chunkPosition;
@@ -46,25 +51,93 @@ public class Chunk
         this.size = size;
         this.scale = scale;
         this.edgeDepth = edgeDepth;
+        this.gridSize = gridSize;
+    }
+
+    public float GetAvgCellHeight(float x, float z)
+    {
+        float[] neighborHeights = {
+                heightMap.values[(int)x, (int)z],
+                heightMap.values[(int)x + 1, (int)z],
+                heightMap.values[(int)x, (int)z + 1],
+                heightMap.values[(int)x + 1, (int)z + 1]
+            };
+
+        float[] minMaxNeighbors = {
+                neighborHeights.Max(),
+                neighborHeights.Min(),
+            };
+        float height = Utils.GetAvegerage(minMaxNeighbors);
+
+        return height;
+    }
+
+    public Vector3 ToLocalPosition(Vector3 coord)
+    {
+        // float height = GetAvgCellHeight(x, z);
+
+        float coordX = (coord.x - worldPosition.x) + (size - 2) / 2;
+        float coordZ = (coord.z - worldPosition.y) + (size - 2) / 2;
+
+        Vector3 localCoord = new Vector3(coordX, coord.y, coordZ);
+
+        return localCoord;
     }
 
     /// <summary>
-    /// Converts a local coordinate inside a chunk to a world coordinate.
+    /// Converts a local position inside a chunk to a world position.
     /// </summary>
     /// <param name="x">the x position of coord</param>
     /// <param name="z">the z position of coord</param>
-    public Vector2 ChunkCoordToWorldCoord(float x, float z)
+    public Vector3 ToWorldPosition(float x, float z)
     {
-        float coordX = x + worldPosition.x;
-        float coordZ = z + worldPosition.y;
+        float height = GetAvgCellHeight(x, z);
 
-        Vector2 worldCoord = new Vector2(coordX, coordZ);
+        float topLeftX = ((size - 1) / -2f) + worldPosition.x;
+        float topLeftZ = ((size - 1) / 2f) + worldPosition.y;
+
+        float coordX = (topLeftX + x) * scale + 0.5f;
+        float coordY = height;
+        float coordZ = (topLeftZ - z) * scale - 0.5f;
+
+        Vector3 worldCoord = new Vector3(coordX, coordY, coordZ);
 
         return worldCoord;
+    }
+
+    public List<Vector3> GetChunkGrid()
+    {
+        List<Vector2> localCoords = GetLocalGrid();
+        List<Vector3> worldCoords = new List<Vector3>();
+
+        localCoords.ForEach(coord =>
+        {
+            Vector3 worldCoord = ToWorldPosition(coord.x, coord.y);
+            Vector3 position = worldCoord;
+
+            worldCoords.Add(position);
+        });
+
+        return worldCoords;
+    }
+
+    private List<Vector2> GetLocalGrid()
+    {
+        List<Vector2> coords = new List<Vector2>();
+
+        for (int x = 1; x <= gridSize; x++)
+        {
+            for (int z = 1; z <= gridSize; z++)
+            {
+                coords.Add(new Vector2(x, z));
+            }
+        }
+
+        return coords;
     }
 }
 
 public enum Edge
 {
-    Top, Left, Right, Bottom, None, TopLeft, TopRight, BottomLeft, BottomRight
+    Top, Left, Right, Bottom, None, TopLeft, TopRight, BottomLeft, BottomRight, All
 }

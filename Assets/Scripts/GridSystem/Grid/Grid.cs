@@ -112,7 +112,6 @@ public class Grid<TGridCell>
     public TGridCell GetGridCell(Vector3 worldPosition)
     {
         var (x, z) = ToGridPosition(worldPosition);
-        // Debug.Log(x + " " + z);
         return GetGridCell(x, z);
     }
 

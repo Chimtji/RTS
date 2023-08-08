@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6aa674c7030b43799afd33f51a72539, type: 3}
+  m_Name: Test Terrain Settings
+  m_EditorClassIdentifier: 
+  autoUpdate: 1
+  containerName: Terrain
+  material: {fileID: 2100000, guid: ec39889a8cf3741de9c2bb61a4a102a8, type: 2}
+  heightMapSettings:
+    noiseSettings:
+      scale: 50
+      octaves: 4
+      persistance: 0.584
+      lacunarity: 2.3
+      seed: 28
+      offset: {x: 0, y: 0}
+    useFalloff: 0
+    heightMultiplier: 30
+    heightCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.008745573
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.054544494
+        value: 0.6522963
+        inSlope: 0.04257849
+        outSlope: 0.04257849
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.2582651
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.3760235
+        value: 0.19760959
+        inSlope: 0.07566949
+        outSlope: 0.07566949
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.23756829
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9896654
+        value: 1.1079862
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  waterPrefab: {fileID: 5163682490895930026, guid: 61f7ea9adfb5b4563b35911e2468d465, type: 3}
+  waterMinHeight: 0
+  waterMaxHeight: 0.99
+  groundMinHeight: 0.99
+  groundMaxHeight: 2.5
+  mountainMinHeight: 2.5
+  mountainMaxHeight: 10

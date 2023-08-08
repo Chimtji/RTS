@@ -5,26 +5,37 @@ using System.Collections.Generic;
 public class ChunkMap
 {
     public int mapSize;
-    public HeightMapSettings heightMapSettings;
+    public Vector2 mapCenterWorld;
+    public float mapSizeWorld
+    {
+        get
+        {
+            return GRIDSIZE * (mapSize + 1);
+        }
+    }
+    public TerrainSettings terrainSettings;
 
     /// <summary>
     /// How deep the map should go from height 0
     /// </summary>
-    readonly float EDGEDEPTH = 5f;
+    public readonly float EDGEDEPTH = 5f;
 
     /// <summary>
     /// The scale of each chunk in the world. This is a constant because it's not supposed to change once set in development.
     /// </summary>
-    readonly float CHUNKSCALE = 1f;
+    public readonly float CHUNKSCALE = 1f;
 
     /// <summary>
     /// the number of vertices per line. This is a constant because of the square limit of each mesh.
     /// </summary>
     /// { 48, 72, 96, 120, 144, 168, 192, 216, 240 };
-    readonly int CHUNKSIZE = 97;
+    public readonly int CHUNKSIZE = 97;
 
     public Dictionary<Vector2, Chunk> chunks = new Dictionary<Vector2, Chunk>();
 
+    /// <summary>
+    /// The Size of the spawnable grid on a chunk.
+    /// </summary>
     public float GRIDSIZE
     {
         get
@@ -33,10 +44,10 @@ public class ChunkMap
         }
     }
 
-    public ChunkMap(int mapSize, HeightMapSettings heightMapSettings)
+    public ChunkMap(int mapSize, TerrainSettings terrainSettings)
     {
         this.mapSize = mapSize - 1;
-        this.heightMapSettings = heightMapSettings;
+        this.terrainSettings = terrainSettings;
         CreateChunkList();
     }
 
@@ -61,6 +72,8 @@ public class ChunkMap
                 chunks.Add(position, chunk);
             }
         }
+
+        mapCenterWorld = new Vector2(((mapSize) * CHUNKSIZE * CHUNKSCALE) / 2, ((mapSize) * CHUNKSIZE * CHUNKSCALE) / 2);
     }
 
     /// <summary>
@@ -73,10 +86,10 @@ public class ChunkMap
         Vector2 chunkWorldPos = position * GRIDSIZE;
         Vector2 chunkCenterWorldPosition = chunkWorldPos / CHUNKSCALE;
 
-        HeightMap heightMap = new HeightMap(CHUNKSIZE, heightMapSettings, chunkCenterWorldPosition);
+        HeightMap heightMap = new HeightMap(CHUNKSIZE, terrainSettings.heightMapSettings, chunkCenterWorldPosition);
 
         Bounds bounds = new Bounds(chunkCenterWorldPosition, Vector2.one * GRIDSIZE);
-        Chunk chunk = new Chunk(chunkCenterWorldPosition, position, heightMap, edgeType, bounds, CHUNKSIZE, CHUNKSCALE, EDGEDEPTH, GRIDSIZE);
+        Chunk chunk = new Chunk(chunkCenterWorldPosition, position, heightMap, edgeType, bounds, CHUNKSIZE, CHUNKSCALE, EDGEDEPTH, GRIDSIZE, terrainSettings);
         return chunk;
 
     }

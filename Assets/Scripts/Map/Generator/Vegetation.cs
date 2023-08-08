@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu()]
-public class TerrainObject : UpdatableData
+public class Vegetation : UpdatableData
 {
     public GameObject prefab;
     public string containerName;

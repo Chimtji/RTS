@@ -54,7 +54,7 @@ public class ChunkMesh
 
                 if (chunk.edgeType != Edge.None)
                 {
-                    // vertexPosition = GetEdgePosition(chunk.edgeType, x, z, meshSize, vertexPosition, chunk.edgeDepth);
+                    vertexPosition = GetEdgePosition(chunk.edgeType, x, z, meshSize, vertexPosition, chunk.edgeDepth);
                 }
 
                 flatShadeMesh.AddVertex(vertexPosition, percent, vertexIndex);

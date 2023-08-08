@@ -47,7 +47,7 @@ public class HeightMap
                 noiseMap.values[w, h] *= heightCurve_threadsafe.Evaluate(noiseMap.values[w, h]) * settings.heightMultiplier;
 
                 // Remove Mathf.Floor if terrain should not be stepped.
-                noiseMap.values[w, h] = Mathf.Floor(noiseMap.values[w, h]) / 2;
+                noiseMap.values[w, h] = noiseMap.values[w, h] / 2;
 
                 if (noiseMap.values[w, h] > maxValue)
                 {

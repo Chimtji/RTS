@@ -4,24 +4,24 @@ using System.Collections.Generic;
 using Trout.Utils;
 
 [System.Serializable]
-public class ObjectGenerator
+public class VegetationGenerator
 {
     public GameObject container;
 
     public Dictionary<Vector3, GameObject> objects = new Dictionary<Vector3, GameObject>();
 
-    public void Generate(TerrainObject terrainObject, ChunkMap chunkMap, Transform outerContainer)
+    public void Generate(Vegetation vegetation, ChunkMap chunkMap, Transform outerContainer)
     {
-        Utils.RemoveObject(terrainObject.containerName);
+        Utils.RemoveObject(vegetation.containerName);
 
 
-        this.container = new GameObject(terrainObject.containerName);
+        this.container = new GameObject(vegetation.containerName);
         container.transform.parent = outerContainer;
 
         foreach (KeyValuePair<Vector2, Chunk> item in chunkMap.chunks)
         {
             Chunk chunk = item.Value;
-            NoiseMap noiseMap = new NoiseMap(chunk.size, terrainObject.noiseSettings, item.Key);
+            NoiseMap noiseMap = new NoiseMap(chunk.size, vegetation.noiseSettings, item.Key);
             List<Vector3> chunkGrid = chunk.GetChunkGrid();
 
             chunkGrid.ForEach(coord =>
@@ -33,11 +33,11 @@ public class ObjectGenerator
                         (int)chunk.ToLocalPosition(coord).z
                     ];
 
-                    if (coord.y < terrainObject.maxSpawnHeight && coord.y > terrainObject.minSpawnHeight)
+                    if (coord.y < vegetation.maxSpawnHeight && coord.y > vegetation.minSpawnHeight)
                     {
                         if (noiseAtCoord > 0.2 && noiseAtCoord < 0.4)
                         {
-                            objects.Add(coord, terrainObject.prefab);
+                            objects.Add(coord, vegetation.prefab);
                         }
                     }
                 }

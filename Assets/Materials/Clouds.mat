@@ -52,7 +52,7 @@ Material:
     - _AlphaClip: 1
     - _Blend: 0
     - _CastShadows: 1
-    - _Cloud_Height: -5.2
+    - _Cloud_Height: 0.5
     - _Cull: 2
     - _Cut_Off: -86.3
     - _Density: 0.82

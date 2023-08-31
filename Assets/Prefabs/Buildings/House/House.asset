@@ -19,6 +19,6 @@ MonoBehaviour:
   visual: {fileID: 6923931343685377389, guid: 1abc4e1f1d933414c8c97ea5462fee7f, type: 3}
   width: 2
   height: 2
-  visualConstruction: {fileID: 0}
-  visualBlueprint: {fileID: 0}
+  visualConstruction: {fileID: 6923931343685377389, guid: 1abc4e1f1d933414c8c97ea5462fee7f, type: 3}
+  visualBlueprint: {fileID: 6923931343685377389, guid: e7d47cd1d21994c8392e302a4788614a, type: 3}
   visualBlueprintError: {fileID: 0}

@@ -9,8 +9,6 @@ public class TBuilding : ScriptableObject
     [Header("Attributes")]
     public string name;
     public string description;
-    public int health;
-    public int cost;
 
     [Header("Structure")]
     public GameObject visual;
@@ -23,4 +21,11 @@ public class TBuilding : ScriptableObject
     [Header("Blueprint")]
     public GameObject visualBlueprint;
     public GameObject visualBlueprintError;
+
+    [Header("Stats")]
+    public int health;
+
+    [Header("Economy")]
+    public int cost;
+
 }

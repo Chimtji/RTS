@@ -20,6 +20,8 @@ public class BuildManager : MonoBehaviour
     private TBuilding pickedBuilding;
 
     private GameObject blueprint;
+    private GameObject construction;
+    private GameObject building;
 
 
     private bool inBuildMode = false;
@@ -32,11 +34,11 @@ public class BuildManager : MonoBehaviour
 
     void Update()
     {
-        if (inBuildMode && blueprint != null)
+        if (inBuildMode && blueprint != null && blueprint.GetComponent<Blueprint>().isPlaceable)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                PlaceObject();
+                Build();
             }
         }
 
@@ -55,22 +57,37 @@ public class BuildManager : MonoBehaviour
         }
     }
 
-    public void PlaceObject()
+    public void Build()
     {
-        inBuildMode = false;
+        construction = new GameObject("Construction");
+        Vector3 buildPosition = blueprint.GetComponent<Blueprint>().buildPosition;
+        construction.AddComponent<Construction>().Setup(pickedBuilding, buildPosition);
+        Destroy(blueprint);
+        ChangeBuildMode(false);
     }
 
     public void SelectObject(int index)
     {
         pickedBuilding = buildings[index];
-        inBuildMode = true;
+        ChangeBuildMode(true);
 
         mousePosition = inputManager.GetMousePosition();
 
-        // blueprint = Instantiate(pickedBuilding.visualBlueprint, mousePosition, Quaternion.identity);
-        blueprint = new GameObject("Blueprint");
-        blueprint.AddComponent<Blueprint>().Setup(pickedBuilding, inputManager, chunkMap, blueprintGrid);
+        if (blueprint == null)
+        {
+            blueprint = new GameObject("Blueprint");
+            blueprint.AddComponent<Blueprint>().Setup(pickedBuilding, inputManager, chunkMap, blueprintGrid);
+        }
+        else
+        {
+            blueprint.GetComponent<Blueprint>().Replace(pickedBuilding);
+        }
 
+    }
+
+    private void ChangeBuildMode(bool buildMode)
+    {
+        inBuildMode = buildMode;
         BuildGridMap buildGridMap = gameObject.GetComponent<BuildGridMap>();
         buildGridMap.SetBuildMode(inBuildMode);
     }

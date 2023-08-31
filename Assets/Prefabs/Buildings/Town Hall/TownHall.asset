@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Town Hall
   description: The home building for a nation
-  health: 0
+  health: 100
   cost: 0
   visual: {fileID: 7704608758626444922, guid: e6f0ae22436db4025b9852c9471b77fe, type: 3}
   width: 4
   height: 4
-  visualConstruction: {fileID: 0}
-  visualBlueprint: {fileID: 7704608758626444922, guid: e6f0ae22436db4025b9852c9471b77fe, type: 3}
+  visualConstruction: {fileID: 7704608758626444922, guid: e6f0ae22436db4025b9852c9471b77fe, type: 3}
+  visualBlueprint: {fileID: 7704608758626444922, guid: f0915e57b73054e8380fde9d29786b43, type: 3}
   visualBlueprintError: {fileID: 0}

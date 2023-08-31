@@ -5,16 +5,20 @@ using UnityEngine;
 
 public class Blueprint : MonoBehaviour
 {
-    private TBuilding attributes;
+    public TBuilding attributes;
     private InputManager inputManager;
 
     TerrainChunkMap chunkMap;
 
-    private Vector3 position;
+    private Vector3 mousePosition;
+    private Tile mouseTile;
     private float steepness;
+
+    private GameObject buildingVisual;
 
     private List<Tile> tiles;
     private Material gridMaterial;
+    public Vector3 buildPosition;
 
     private MeshRenderer meshRenderer;
     private MeshFilter meshFilter;
@@ -37,13 +41,35 @@ public class Blueprint : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 nextPosition = inputManager.GetMousePosition();
-        if (nextPosition != position)
+        // I don't know why I have to do this null check. If it's not here it will throw a null exception when Replace is fired.
+        if (inputManager != null)
         {
-            position = nextPosition;
-            UpdateTiles();
-            UpdatePlaceable();
+            Vector3 nextPosition = inputManager.GetMousePosition();
+            if (nextPosition != mousePosition)
+            {
+                mousePosition = nextPosition;
+                mouseTile = chunkMap.GetTile(mousePosition);
+
+                UpdateTiles();
+                UpdatePlaceable();
+
+                buildingVisual.transform.position = buildPosition;
+                collider.transform.position = buildPosition;
+            }
         }
+    }
+
+    public void Replace(TBuilding attributes)
+    {
+        this.attributes = attributes;
+
+        GameObject oldBuilding = buildingVisual;
+        GameObject newBuilding = Instantiate(attributes.visualBlueprint, buildPosition, Quaternion.identity, transform);
+
+        oldBuilding.SetActive(false);
+        buildingVisual = newBuilding;
+
+        Destroy(oldBuilding);
     }
 
     private void UpdatePlaceable()
@@ -69,6 +95,8 @@ public class Blueprint : MonoBehaviour
 
     private void Create()
     {
+        mouseTile = chunkMap.GetTile(mousePosition);
+
         Mesh mesh = new Mesh();
         meshFilter = gameObject.AddComponent<MeshFilter>();
         meshRenderer = gameObject.AddComponent<MeshRenderer>();
@@ -89,12 +117,13 @@ public class Blueprint : MonoBehaviour
         meshRenderer.sharedMaterial = gridMaterial;
         meshFilter.mesh = mesh;
 
+        buildingVisual = Instantiate(attributes.visualBlueprint, mouseTile.bottomLeftCorner, Quaternion.identity, transform);
+
         UpdateTiles();
     }
 
     private void UpdateTiles()
     {
-        Tile mouseTile = chunkMap.GetTile(position);
         tiles = new List<Tile>();
 
         for (int width = 0; width < attributes.width; width++)
@@ -104,7 +133,6 @@ public class Blueprint : MonoBehaviour
                 if (height == 0 && width == 0)
                 {
                     tiles.Add(mouseTile);
-                    collider.transform.position = mouseTile.topRightCorner;
                 }
                 else
                 {
@@ -155,6 +183,7 @@ public class Blueprint : MonoBehaviour
         }
 
         UpdateSteepness(vertices);
+        UpdateGridCenterPosition(vertices);
 
         mesh.Clear();
         mesh.vertices = vertices;
@@ -173,5 +202,25 @@ public class Blueprint : MonoBehaviour
         }
 
         steepness = Utils.GetDifference(heights);
+    }
+
+    private void UpdateGridCenterPosition(Vector3[] vertices)
+    {
+        float[] xPositions = new float[vertices.Length];
+        float[] zPositions = new float[vertices.Length];
+        float[] yPositions = new float[vertices.Length];
+
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            xPositions[i] = vertices[i].x;
+            zPositions[i] = vertices[i].z;
+            yPositions[i] = vertices[i].y;
+        }
+
+        float xPos = Utils.GetAverage(xPositions);
+        float yPos = Utils.GetAverage(yPositions);
+        float zPos = Utils.GetAverage(zPositions);
+
+        buildPosition = new Vector3(xPos, yPos, zPos);
     }
 }

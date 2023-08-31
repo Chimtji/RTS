@@ -94,8 +94,8 @@ public class TerrainChunk
 
         // Utils.ClearChildren(GameObject.Find("DebugContainer"));
 
-        SpawnWater();
-        SpawnTrees();
+        // SpawnWater();
+        // SpawnTrees();
     }
 
     private void SpawnTrees()

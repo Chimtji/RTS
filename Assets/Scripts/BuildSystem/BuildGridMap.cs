@@ -52,14 +52,7 @@ public class BuildGridMap : Generator
 
     public void SetBuildMode(bool buildMode)
     {
-        if (buildMode)
-        {
-            gridContainer.SetActive(true);
-        }
-        else
-        {
-            gridContainer.SetActive(false);
-        }
+        gridContainer.SetActive(buildMode);
     }
 
     private void Rebuild()

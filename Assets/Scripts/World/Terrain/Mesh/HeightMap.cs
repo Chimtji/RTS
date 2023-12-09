@@ -16,14 +16,11 @@ public class HeightMap
     /// <param name="size">The size of the heightmap</param>
     /// <param name="settings">the heightmap settings used for generation</param>
     /// <param name="position">the world position of the heightmap</param>
-    public HeightMap(int size, HeightMapSettings settings, Vector2 pos, NoiseSpawnPositions playerSpawnMap)
+    public HeightMap(int size, HeightMapSettings settings, Vector2 pos, NoiseStartLocation startLocation)
     {
-        // INoiseFilter ground = NoiseFilterFactory.CreateNoiseFilter(size, settings.ground.settings, pos);
         INoiseFilter[] ground = InitNoiseFilters(size, settings.ground, new INoiseFilter[settings.ground.Length], pos);
         INoiseFilter[] waters = InitNoiseFilters(size, settings.waters, new INoiseFilter[settings.waters.Length], pos);
         INoiseFilter[] mountains = InitNoiseFilters(size, settings.mountains, new INoiseFilter[settings.mountains.Length], pos);
-        // INoiseFilter water = NoiseFilterFactory.CreateNoiseFilter(size, settings.waters[0].settings, pos);
-        // INoiseFilter mountain = NoiseFilterFactory.CreateNoiseFilter(size, settings.mountains[0].settings, pos);
 
         float waterLevelOffset = settings.waters[0].settings.oceanFloorDepth;
         float mountainLevelOffset = settings.mountains[0].settings.oceanFloorDepth;
@@ -41,8 +38,8 @@ public class HeightMap
             {
                 Vector3 position = new Vector3(x, 0, y);
                 float groundBaseElevation = CalcBaseElevation(ground, settings.ground, position);
-                float watersBaseElevation = CalcBaseElevation(waters, settings.waters, position) - playerSpawnMap.values[x, y];
-                float mountainsBaseElevation = CalcBaseElevation(mountains, settings.mountains, position) - playerSpawnMap.values[x, y];
+                float watersBaseElevation = CalcBaseElevation(waters, settings.waters, position) - startLocation.values[x, y];
+                float mountainsBaseElevation = CalcBaseElevation(mountains, settings.mountains, position) - startLocation.values[x, y];
 
                 float groundNoise = CalcElevation(ground, settings.ground, position, groundBaseElevation) * groundLevelHeight;
                 float waterNoise = CalcElevation(waters, settings.waters, position, watersBaseElevation) * waterLevelOffset * Mathf.Clamp01(watersBaseElevation - watersMaskThreshold);

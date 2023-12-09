@@ -89,8 +89,8 @@ public class TerrainChunk
         MeshCollider meshCollider = gameObject.AddComponent<MeshCollider>();
         meshRenderer.sharedMaterial = settings.material;
 
-        NoiseSpawnPositions spawnPositionsMap = new NoiseSpawnPositions(settings.meshSize, settings.spawnSettings, hasPlayerSpawn, edge);
-        heightMap = new HeightMap(settings.meshSize, settings.heightMapSettings, new Vector2(worldPosition.x, worldPosition.z), spawnPositionsMap);
+        NoiseStartLocation startLocation = new NoiseStartLocation(settings.meshSize, settings.startLocationSettings, hasPlayerSpawn, edge);
+        heightMap = new HeightMap(settings.meshSize, settings.heightMapSettings, new Vector2(worldPosition.x, worldPosition.z), startLocation);
 
         mesh = new TerrainChunkMesh(this).mesh;
         grid = new Grid(worldPosition, settings.meshSize - 2, settings.scale, mesh);

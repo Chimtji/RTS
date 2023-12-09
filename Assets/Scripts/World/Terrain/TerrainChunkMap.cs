@@ -49,9 +49,9 @@ public class TerrainChunkMap : Generator
         chunks.Clear();
         Utils.ClearChildren(gameObject);
 
-        for (int x = 0; x < settings.size; x++)
+        for (int x = 0; x < gameSettings.players.Length; x++)
         {
-            for (int z = 0; z < settings.size; z++)
+            for (int z = 0; z < gameSettings.players.Length; z++)
             {
                 Vector2 position = new Vector2(x, z);
 

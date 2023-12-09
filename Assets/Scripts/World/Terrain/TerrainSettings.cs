@@ -6,12 +6,6 @@ using System.Linq;
 public class TerrainSettings : UpdatableData
 {
     [Header("General")]
-
-    /// <summary>
-    /// The size of each side of the map in chunks. The map will always be a square. Start at 1
-    /// </summary>
-    public int size = 1;
-
     /// <summary>
     /// The scale of the map
     /// </summary>
@@ -35,8 +29,7 @@ public class TerrainSettings : UpdatableData
     /// </summary>
     public Material material;
 
-    [Header("Player Settings")]
-    public NoiseSpawnPositionsSettings spawnSettings;
+    public NoiseStartLocationSettings startLocationSettings;
 
     [Header("Height Settings")]
     public HeightMapSettings heightMapSettings;

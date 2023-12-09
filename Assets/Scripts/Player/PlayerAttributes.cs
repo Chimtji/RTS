@@ -1,15 +1,10 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Player", menuName = "Players/Player")]
-public class PlayerAttributes : ScriptableObject
+[System.Serializable]
+public class PlayerAttributes
 {
     [Header("General")]
     public string id;
-
-    [Header("Spawn")]
-    [SerializeField]
-    public SpawnLocation spawnLocation;
-
     [Header("Diplomacy")]
     public string nickname;
     public Color color;

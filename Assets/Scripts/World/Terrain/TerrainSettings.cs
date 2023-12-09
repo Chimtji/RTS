@@ -35,6 +35,9 @@ public class TerrainSettings : UpdatableData
     /// </summary>
     public Material material;
 
+    [Header("Player Settings")]
+    public NoiseSpawnPositionsSettings spawnSettings;
+
     [Header("Height Settings")]
     public HeightMapSettings heightMapSettings;
 

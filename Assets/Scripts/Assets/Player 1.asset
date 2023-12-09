@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player 1
   m_EditorClassIdentifier: 
   id: player1
-  spawnLocation: 2
+  spawnLocation: 3
   nickname: Kim
   color: {r: 1, g: 0, b: 0, a: 0}
   team: 1

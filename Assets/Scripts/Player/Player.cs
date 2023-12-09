@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public PlayerAttributes attributes;
+    // public PlayerAttributes attributes;
 
-    public Player(PlayerAttributes playerAttributes)
-    {
-        attributes = playerAttributes;
-    }
+    // public Player(PlayerAttributes playerAttributes)
+    // {
+    //     attributes = playerAttributes;
+    // }
 
-    public void Spawn()
-    {
+    // public void Spawn()
+    // {
 
-    }
+    // }
 }

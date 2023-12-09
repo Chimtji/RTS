@@ -3,6 +3,7 @@ using UnityEngine;
 using Trout.Utils;
 using System.Linq;
 using System;
+using UnityEngine.UI;
 
 public class TerrainChunk
 {
@@ -41,18 +42,21 @@ public class TerrainChunk
     /// </summary>
     public List<List<Tile>> lakes = new List<List<Tile>>();
     public List<Vector3> trees = new List<Vector3>();
+    public Edge edge;
 
     public TerrainChunk(
         Vector2 mapPosition,
         TerrainSettings settings,
         Transform container,
-        int scale
+        bool hasPlayerSpawn,
+        Edge edge
         )
     {
+        this.edge = edge;
         this.settings = settings;
         worldPosition = GetWorldPosition(mapPosition);
 
-        Spawn(container);
+        Spawn(container, edge, hasPlayerSpawn);
     }
 
     /// <summary>
@@ -73,7 +77,7 @@ public class TerrainChunk
         return new Vector2(Mathf.Floor(position.x) + (settings.scale / 2) + 0.5f, Mathf.Floor(position.z) + (settings.scale / 2) + 0.5f);
     }
 
-    private void Spawn(Transform container)
+    private void Spawn(Transform container, Edge edge, bool hasPlayerSpawn)
     {
         gameObject = new GameObject("Terrain Chunk");
         gameObject.transform.parent = container.transform;
@@ -85,7 +89,8 @@ public class TerrainChunk
         MeshCollider meshCollider = gameObject.AddComponent<MeshCollider>();
         meshRenderer.sharedMaterial = settings.material;
 
-        heightMap = new HeightMap(settings.meshSize, settings.heightMapSettings, new Vector2(worldPosition.x, worldPosition.z));
+        NoiseSpawnPositions spawnPositionsMap = new NoiseSpawnPositions(settings.meshSize, settings.spawnSettings, hasPlayerSpawn, edge);
+        heightMap = new HeightMap(settings.meshSize, settings.heightMapSettings, new Vector2(worldPosition.x, worldPosition.z), spawnPositionsMap);
 
         mesh = new TerrainChunkMesh(this).mesh;
         grid = new Grid(worldPosition, settings.meshSize - 2, settings.scale, mesh);

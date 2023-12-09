@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public PlayerAttributes[] playersAttributes;
-    void Start()
-    {
-        foreach (PlayerAttributes playerAttributes in playersAttributes)
-        {
-            Player player = new Player(playerAttributes);
-        }
-    }
+    public GameSettings settings;
+    public GameObject terrain;
+    // public PlayerAttributes[] playersAttributes;
+    // void Start()
+    // {
+    //     foreach (PlayerAttributes playerAttributes in playersAttributes)
+    //     {
+    //         Player player = new Player(playerAttributes);
+    //     }
+    // }
 }

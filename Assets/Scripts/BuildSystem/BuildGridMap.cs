@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Trout.Utils;
+using Trout.Types;
 
 public class BuildGridMap : Generator
 {
@@ -29,9 +30,9 @@ public class BuildGridMap : Generator
         SetBuildMode(false);
 
 
-        Dictionary<Vector2, TerrainChunk> terrainChunks = terrain.GetComponent<TerrainChunkMap>().chunks;
+        ChunkMap terrainChunks = terrain.GetComponent<TerrainManager>().chunks;
 
-        foreach (KeyValuePair<Vector2, TerrainChunk> chunkData in terrainChunks)
+        foreach (KeyValuePair<ChunkPosition, TerrainChunk> chunkData in terrainChunks)
         {
             TerrainChunk chunk = chunkData.Value;
             GameObject chunkObj = new GameObject("Chunk");

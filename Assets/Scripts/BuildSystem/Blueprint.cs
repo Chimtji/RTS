@@ -8,7 +8,7 @@ public class Blueprint : MonoBehaviour
     public TBuilding attributes;
     private InputManager inputManager;
 
-    TerrainChunkMap chunkMap;
+    TerrainManager chunkMap;
 
     private Vector3 mousePosition;
     private Tile mouseTile;
@@ -29,7 +29,7 @@ public class Blueprint : MonoBehaviour
     public bool isPlaceable = true;
     private bool isColliding = false;
 
-    public void Setup(TBuilding attributes, InputManager inputManager, TerrainChunkMap chunkMap, Material gridMaterial)
+    public void Setup(TBuilding attributes, InputManager inputManager, TerrainManager chunkMap, Material gridMaterial)
     {
         this.inputManager = inputManager;
         this.attributes = attributes;

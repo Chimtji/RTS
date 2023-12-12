@@ -13,7 +13,7 @@ public class BuildManager : MonoBehaviour
     [Header("Blueprint")]
     public Material blueprintGrid;
 
-    private TerrainChunkMap chunkMap;
+    private TerrainManager chunkMap;
     private InputManager inputManager;
     private Vector3 mousePosition;
 
@@ -29,7 +29,7 @@ public class BuildManager : MonoBehaviour
     void Start()
     {
         inputManager = gameObject.GetComponent<InputManager>();
-        chunkMap = terrain.GetComponent<TerrainChunkMap>();
+        chunkMap = terrain.GetComponent<TerrainManager>();
     }
 
     void Update()

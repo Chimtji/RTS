@@ -21,10 +21,10 @@ public class Grid
         // debugGrid();
     }
 
-    public Tile GetTile(Vector3 position)
-    {
-        return tilesList.Find(tile => Vector3.Distance(tile.position, position) <= 1f);
-    }
+    // public Tile GetTile(Vector3 position)
+    // {
+    //     return tilesList.Find(tile => Vector3.Distance(tile.position, position) <= 1f);
+    // }
 
     private void CreateGrid(Mesh mesh)
     {

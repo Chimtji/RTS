@@ -9,6 +9,7 @@ public class HeightMapSettings
     public NoiseLayer[] ground;
     public NoiseLayer[] mountains;
     public NoiseLayer[] waters;
+    public NoiseLayer[] startLocation;
 
     // public bool useFalloff = false;
 

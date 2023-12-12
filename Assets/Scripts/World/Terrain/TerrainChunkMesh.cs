@@ -76,26 +76,26 @@ public class TerrainChunkMesh
         mesh = flatShadeMesh.CreateMesh();
     }
 
-    static Vector3 GetEdgePosition(Edge edge, int x, int z, int mapSize, Vector3 position, float edgeHeight)
+    static Vector3 GetEdgePosition(ChunkPositionName edge, int x, int z, int mapSize, Vector3 position, float edgeHeight)
     {
 
         Vector3 modifiedPosition = new Vector3(position.x, position.y, position.z);
-        if ((edge == Edge.Top || edge == Edge.TopLeft || edge == Edge.TopRight || edge == Edge.All) && IsLeftOrTopEdge(z, mapSize))
+        if ((edge == ChunkPositionName.Top || edge == ChunkPositionName.TopLeft || edge == ChunkPositionName.TopRight || edge == ChunkPositionName.Middle) && IsLeftOrTopEdge(z, mapSize))
         {
             modifiedPosition.y = -edgeHeight;
             modifiedPosition.z = modifiedPosition.z - 1f;
         }
-        if ((edge == Edge.Bottom || edge == Edge.BottomRight || edge == Edge.BottomLeft || edge == Edge.All) && IsRightOrBottomEdge(z, mapSize))
+        if ((edge == ChunkPositionName.Bottom || edge == ChunkPositionName.BottomRight || edge == ChunkPositionName.BottomLeft || edge == ChunkPositionName.Middle) && IsRightOrBottomEdge(z, mapSize))
         {
             modifiedPosition.y = -edgeHeight;
             modifiedPosition.z = modifiedPosition.z + 1f;
         }
-        if ((edge == Edge.Left || edge == Edge.TopLeft || edge == Edge.BottomLeft || edge == Edge.All) && IsLeftOrTopEdge(x, mapSize))
+        if ((edge == ChunkPositionName.Left || edge == ChunkPositionName.TopLeft || edge == ChunkPositionName.BottomLeft || edge == ChunkPositionName.Middle) && IsLeftOrTopEdge(x, mapSize))
         {
             modifiedPosition.y = -edgeHeight;
             modifiedPosition.x = modifiedPosition.x + 1f;
         }
-        if ((edge == Edge.Right || edge == Edge.TopRight || edge == Edge.BottomRight || edge == Edge.All) && IsRightOrBottomEdge(x, mapSize))
+        if ((edge == ChunkPositionName.Right || edge == ChunkPositionName.TopRight || edge == ChunkPositionName.BottomRight || edge == ChunkPositionName.Middle) && IsRightOrBottomEdge(x, mapSize))
         {
             modifiedPosition.y = -edgeHeight;
             modifiedPosition.x = modifiedPosition.x - 1f;

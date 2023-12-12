@@ -3,14 +3,16 @@ using UnityEngine;
 
 public static class NoiseFilterFactory
 {
-    public static INoiseFilter CreateNoiseFilter(int size, NoiseSettings settings, Vector2 position)
+    public static INoiseFilter CreateNoiseFilter(int size, NoiseSettings settings, Vector2 position, ChunkPositionName edge)
     {
         switch (settings.filterType)
         {
-            case NoiseSettings.FilterType.Simple:
-                return new NoiseFilterSimple(size, settings, position);
-            case NoiseSettings.FilterType.Rigid:
-                return new NoiseFilterRigid(size, settings, position);
+            case NoiseSettings.FilterType.Simplex:
+                return new SimplexNoiseFilter(size, settings, position, SimplexType.Normal);
+            case NoiseSettings.FilterType.SimplexRigid:
+                return new SimplexNoiseFilter(size, settings, position, SimplexType.Rigid);
+            case NoiseSettings.FilterType.Circle:
+                return new CircleNoiseFilter(size, settings, position, edge);
         }
 
         return null;

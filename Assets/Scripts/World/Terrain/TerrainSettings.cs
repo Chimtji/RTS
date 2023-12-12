@@ -29,8 +29,6 @@ public class TerrainSettings : UpdatableData
     /// </summary>
     public Material material;
 
-    public NoiseStartLocationSettings startLocationSettings;
-
     [Header("Height Settings")]
     public HeightMapSettings heightMapSettings;
 

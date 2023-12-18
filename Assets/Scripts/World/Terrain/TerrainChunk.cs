@@ -91,6 +91,7 @@ public class TerrainChunk
         gameObject.transform.parent = container.transform;
         gameObject.transform.position = worldPosition;
         gameObject.layer = settings.layerMask.value;
+        gameObject.AddComponent<TerrainController>();
 
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
         meshRenderer.sharedMaterial = settings.material;
@@ -99,22 +100,6 @@ public class TerrainChunk
         MeshCollider meshCollider = gameObject.AddComponent<MeshCollider>();
 
         meshFilter.sharedMesh = mesh;
-
-        // if (hasPlayerSpawn)
-        // {
-        //     GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //     Vector3 center = new Vector3(startLocation.center.x, 1f, startLocation.center.y);
-
-        //     float xPos = worldPosition.x - settings.meshSize / 2f + center.x;
-        //     float zPos = worldPosition.z + settings.meshSize / 2f - center.z;
-        //     Vector3 pos = new Vector3(xPos, 0f, zPos);
-
-        //     Debug.Log(settings.meshSize + "," + startLocation.center + "," + worldPosition);
-        //     cube.transform.position = pos;
-        //     // Debug.Log(new Vector3(startLocation.center.x, 0, startLocation.center.y));
-
-        // }
-
 
         // Utils.ClearChildren(GameObject.Find("DebugContainer"));
 

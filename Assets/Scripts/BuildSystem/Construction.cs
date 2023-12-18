@@ -60,7 +60,7 @@ public class Construction : MonoBehaviour
     private void FinishBuilding()
     {
         GameObject finishedBuilding = Instantiate(attributes.visual, position, Quaternion.identity);
-        finishedBuilding.AddComponent<Building>().Setup(attributes);
+        // finishedBuilding.AddComponent<Building>().Setup(attributes, position);
         Destroy(gameObject);
     }
 }

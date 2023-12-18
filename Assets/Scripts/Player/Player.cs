@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+[CreateAssetMenu()]
+public class Player : ScriptableObject
 {
-    // public PlayerAttributes attributes;
+    [Header("General")]
+    public string id;
 
-    // public Player(PlayerAttributes playerAttributes)
-    // {
-    //     attributes = playerAttributes;
-    // }
+    [Header("Diplomacy")]
+    public string nickname;
+    public Color color;
+    public int team;
 
-    // public void Spawn()
-    // {
-
-    // }
+    [Header("Civilization")]
+    public Civilization civilization;
 }

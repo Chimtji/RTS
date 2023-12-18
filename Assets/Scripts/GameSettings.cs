@@ -7,6 +7,6 @@ public class GameSettings : UpdatableData
 {
     [Header("General")]
     [Header("Players")]
-    public PlayerAttributes[] players;
+    public Player[] players;
 
 };

@@ -15,7 +15,8 @@ public class PlayersManager : Generator
 
     void SpawnPlayers()
     {
-        ChunkMap terrainChunks = terrain.GetComponent<TerrainManager>().chunks;
+        TerrainManager terrainManager = terrain.GetComponent<TerrainManager>();
+        ChunkMap terrainChunks = terrainManager.chunks;
 
         foreach (KeyValuePair<ChunkPosition, TerrainChunk> chunkData in terrainChunks)
         {
@@ -23,8 +24,8 @@ public class PlayersManager : Generator
 
             if (chunk.heightMap.startLocation.enabled)
             {
-                GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                cube.transform.position = chunk.heightMap.startLocation.position;
+                Tile tile = terrainManager.GetTile(chunk.heightMap.startLocation.position);
+                Building building = new Building(settings.players[0].civilization.townHall, tile.bottomLeftCorner);
             }
         }
     }

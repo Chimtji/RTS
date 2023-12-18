@@ -4,6 +4,9 @@ using Trout.Utils;
 using UnityEngine.UI;
 using System;
 using Trout.Types;
+using Unity.VisualScripting;
+using UnityEngine.EventSystems;
+using Trout;
 
 public class TerrainManager : Generator
 {
@@ -17,8 +20,6 @@ public class TerrainManager : Generator
     /// The dictionary that holds each generated chunk
     /// </summary>
     public ChunkMap chunks = new ChunkMap();
-
-    public ChunkMap chunkies { get; set; }
 
     private void Update()
     {
@@ -59,10 +60,7 @@ public class TerrainManager : Generator
                 chunks.Add(chunkPosition, chunk);
             }
         }
-
-        chunkies = chunks;
     }
-
 
     /// <summary>
     /// Takes a world position and returns the tile in a chunk

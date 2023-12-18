@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "TBuilding", menuName = "Structures/TBuilding")]
 public class TBuilding : ScriptableObject
@@ -28,4 +29,6 @@ public class TBuilding : ScriptableObject
     [Header("Economy")]
     public int cost;
 
+    [Header("UI")]
+    public GameObject buttons;
 }

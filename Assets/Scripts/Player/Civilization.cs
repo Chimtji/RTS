@@ -7,6 +7,6 @@ public class Civilization : ScriptableObject
     public string name;
 
     [Header("Buildings")]
-    public TBuilding townHall;
+    public BuildingData headquarter;
 
 };

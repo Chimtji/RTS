@@ -1,44 +1,110 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using Trout.Utils;
 
 public class BuildManager : MonoBehaviour
 {
+    [Header("Managers")]
+    /// <summary>
+    /// The Game Manager object in the scene
+    /// </summary>
+    public GameObject gameManager;
 
-    public GameObject terrain;
-    public TBuilding[] buildings;
+    /// <summary>
+    /// The Terrain Manager object in the scene
+    /// </summary>
+    public GameObject terrainManager;
+
+    /// <summary>
+    /// The Data Manager object in the scene
+    /// </summary>
+    public GameObject dataManager;
+
+    /// <summary>
+    /// The UI Manager object in the scene
+    /// </summary>
+    public GameObject uiManager;
 
     [Header("Blueprint")]
-    public Material blueprintGrid;
+    /// <summary>
+    /// The shader used for the ground grid of the blueprint
+    /// </summary>
+    public Material blueprintGridMaterial;
 
-    private TerrainManager chunkMap;
-    private InputManager inputManager;
+    /// <summary>
+    /// The shader that's applied on building model when it's in the blueprint state
+    /// </summary>
+    public Material blueprintMaterial;
+
+    /// <summary>
+    /// The bool to toggle build mode on/off
+    /// </summary>
+    public bool inBuildMode = false;
+
+    /// <summary>
+    /// The current position of the cursor;
+    /// </summary>
     private Vector3 mousePosition;
 
-    private TBuilding pickedBuilding;
+    /// <summary>
+    /// The building attributes of the current / selected building
+    /// </summary>
+    private BuildingData buildingData;
 
-    private GameObject blueprint;
-    private GameObject construction;
+    /// <summary>
+    /// The current / selected building gameobject
+    /// </summary>
     private GameObject building;
 
-
-    private bool inBuildMode = false;
-
-    void Start()
+    /// <summary>
+    /// The player this client is controlling
+    /// </summary>
+    private Player player
     {
-        inputManager = gameObject.GetComponent<InputManager>();
-        chunkMap = terrain.GetComponent<TerrainManager>();
+        get
+        {
+            return gameManager.GetComponent<GameManager>().settings.player;
+        }
+    }
+
+    /// <summary>
+    /// The manager for reading the input of mouse and keyboard
+    /// </summary>
+    private InputManager input
+    {
+        get
+        {
+            return gameObject.GetComponent<InputManager>();
+        }
+    }
+
+    /// <summary>
+    /// The chunkmap of the generated terrain
+    /// </summary>
+    private TerrainManager chunkMap
+    {
+        get
+        {
+            return terrainManager.GetComponent<TerrainManager>();
+        }
+    }
+
+    /// <summary>
+    /// The blueprint component attached to the building object
+    /// </summary>
+    private BlueprintController blueprint
+    {
+        get
+        {
+            return building.GetComponent<BlueprintController>();
+        }
     }
 
     void Update()
     {
-        if (inBuildMode && blueprint != null && blueprint.GetComponent<Blueprint>().isPlaceable)
+        if (inBuildMode)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(1))
             {
-                Build();
+                Deselect();
             }
         }
 
@@ -48,7 +114,7 @@ public class BuildManager : MonoBehaviour
     {
         if (inBuildMode)
         {
-            Vector3 nextPosition = inputManager.GetMousePosition();
+            Vector3 nextPosition = input.GetMousePosition();
 
             if (mousePosition != nextPosition)
             {
@@ -57,32 +123,72 @@ public class BuildManager : MonoBehaviour
         }
     }
 
-    public void Build()
+    public void CreateBuilding(BuildingData buildingData, Vector3 position)
     {
-        construction = new GameObject("Construction");
-        Vector3 buildPosition = blueprint.GetComponent<Blueprint>().buildPosition;
-        construction.AddComponent<Construction>().Setup(pickedBuilding, buildPosition);
-        Destroy(blueprint);
-        ChangeBuildMode(false);
+        this.buildingData = buildingData;
+        CreateBuildingObject();
+
+        GameObject visual = Instantiate(buildingData.visual, position, Quaternion.identity, building.transform);
+        visual.name = "prefab";
+
+        building.AddComponent<BuildingController>();
+
+        building = null;
+
     }
 
-    public void SelectObject(int index)
+    public void Select(BuildingData buildingData)
     {
-        pickedBuilding = buildings[index];
+        this.buildingData = buildingData;
+        mousePosition = input.GetMousePosition();
+
+        Destroy(building);
+        building = null; // Is this bad?
+
+        CreateBuildingObject();
+
+        building.AddComponent<BlueprintController>();
         ChangeBuildMode(true);
+    }
 
-        mousePosition = inputManager.GetMousePosition();
+    public void StartConstruction()
+    {
+        blueprint.TearDown();
+        building.AddComponent<ConstructionController>();
+        ChangeBuildMode(false);
+        building = null;
+    }
 
-        if (blueprint == null)
+    private void CreateBuildingObject()
+    {
+        if (building != null)
         {
-            blueprint = new GameObject("Blueprint");
-            blueprint.AddComponent<Blueprint>().Setup(pickedBuilding, inputManager, chunkMap, blueprintGrid);
-        }
-        else
-        {
-            blueprint.GetComponent<Blueprint>().Replace(pickedBuilding);
+            return;
         }
 
+        GameObject container = dataManager.GetComponent<DataManager>().buildings;
+
+        GameObject buildingObject = new GameObject(buildingData.name);
+        buildingObject.transform.SetParent(container.transform);
+        BuildingShared buildingShared = buildingObject.AddComponent<BuildingShared>();
+
+        buildingShared.owner = player;
+        buildingShared.attributes = buildingData;
+        buildingShared.input = input;
+        buildingShared.terrain = chunkMap;
+        buildingShared.blueprintGridMaterial = blueprintGridMaterial;
+        buildingShared.blueprintMaterial = blueprintMaterial;
+        buildingShared.builder = this;
+        buildingShared.uiActionsContainer = uiManager.GetComponent<UIManager>().actions;
+        buildingShared.uiInformationContainer = uiManager.GetComponent<UIManager>().information;
+
+        building = buildingObject;
+    }
+
+    private void Deselect()
+    {
+        ChangeBuildMode(false);
+        Destroy(building);
     }
 
     private void ChangeBuildMode(bool buildMode)

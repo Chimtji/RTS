@@ -12,15 +12,15 @@ public abstract class Generator : MonoBehaviour
 
     public virtual void OnValidate()
     {
-        if (autoUpdate && !Application.isPlaying)
-        {
-            Regenerate();
-        }
+        // if (autoUpdate && !Application.isPlaying)
+        // {
+        //     Regenerate();
+        // }
     }
 
     public void OnValuesChange()
     {
-        Regenerate();
+        // Regenerate();
     }
 
     private void Regenerate()

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Vikings
   m_EditorClassIdentifier: 
   name: Vikings
-  townHall: {fileID: 11400000, guid: 50526c9ae75f542eea15e05215f19ac9, type: 2}
+  headquarter: {fileID: 11400000, guid: 50526c9ae75f542eea15e05215f19ac9, type: 2}

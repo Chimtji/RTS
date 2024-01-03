@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Game Settings
   m_EditorClassIdentifier: 
   autoUpdate: 1
-  players:
-  - {fileID: 11400000, guid: d4264395a700d42f1b6f65863681c472, type: 2}
-  - {fileID: 11400000, guid: 0e11003d6e6ed4c6bb905dd5da300654, type: 2}
+  amountOfPlayers: 2
+  mapSettings: {fileID: 11400000, guid: 5cc4a25aef974437ca9f86a4618944e0, type: 2}
+  playerNumber: 2
+  player: {fileID: 11400000, guid: d4264395a700d42f1b6f65863681c472, type: 2}

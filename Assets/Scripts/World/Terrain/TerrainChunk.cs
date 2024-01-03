@@ -52,7 +52,7 @@ public class TerrainChunk
         ChunkPosition coordinate,
         TerrainSettings settings,
         Transform container,
-        bool isStartLocation,
+        StartLocation startLocation,
         ChunkPositionName edge
         )
     {
@@ -60,7 +60,7 @@ public class TerrainChunk
         this.edge = edge;
         this.settings = settings;
         worldPosition = GetWorldPosition(coordinate);
-        Spawn(container, isStartLocation);
+        Spawn(container, startLocation);
     }
 
     /// <summary>
@@ -81,9 +81,9 @@ public class TerrainChunk
         return new Vector2(Mathf.Floor(position.x) + (settings.scale / 2) + 0.5f, Mathf.Floor(position.z) + (settings.scale / 2) + 0.5f);
     }
 
-    private void Spawn(Transform container, bool isStartLocation)
+    private void Spawn(Transform container, StartLocation startLocation)
     {
-        heightMap = new HeightMap(settings.meshSize, settings.heightMapSettings, new Vector2(worldPosition.x, worldPosition.z), isStartLocation, edge);
+        heightMap = new HeightMap(settings.meshSize, settings.heightMapSettings, new Vector2(worldPosition.x, worldPosition.z), startLocation, edge);
         mesh = new TerrainChunkMesh(this).mesh;
         grid = new Grid(worldPosition, settings.meshSize - 2, settings.scale, mesh);
 

@@ -33,12 +33,13 @@ public class HeightMap
     /// <param name="size">The size of the heightmap</param>
     /// <param name="settings">the heightmap settings used for generation</param>
     /// <param name="position">the world position of the heightmap</param>
-    public HeightMap(int size, HeightMapSettings settings, Vector2 position, bool isStartLocation, ChunkPositionName edge)
+    public HeightMap(int size, HeightMapSettings settings, Vector2 position, StartLocation startLocation, ChunkPositionName edge)
     {
 
         this.size = size;
         this.position = position;
         this.edge = edge;
+        this.startLocation = startLocation;
 
         CircleNoiseFilter startLocationMap = (CircleNoiseFilter)NoiseFilterFactory.CreateNoiseFilter(size, settings.startLocation[0].settings, position, edge);
         INoiseFilter[] ground = InitNoiseFilters(settings.ground, new INoiseFilter[settings.ground.Length]);
@@ -60,8 +61,8 @@ public class HeightMap
                 Vector3 point = new Vector3(x, 0, y);
 
                 float groundBaseElevation = CalcBaseElevation(ground, settings.ground, point);
-                float watersBaseElevation = CalcBaseElevation(waters, settings.waters, point) - (isStartLocation ? startLocationMap.Evaluate(point) : 0);
-                float mountainsBaseElevation = CalcBaseElevation(mountains, settings.mountains, point) - (isStartLocation ? startLocationMap.Evaluate(point) : 0);
+                float watersBaseElevation = CalcBaseElevation(waters, settings.waters, point) - (this.startLocation.Enabled ? startLocationMap.Evaluate(point) : 0);
+                float mountainsBaseElevation = CalcBaseElevation(mountains, settings.mountains, point) - (this.startLocation.Enabled ? startLocationMap.Evaluate(point) : 0);
 
                 float groundNoise = CalcElevation(ground, settings.ground, point, groundBaseElevation) * groundLevelHeight;
                 float waterNoise = CalcElevation(waters, settings.waters, point, watersBaseElevation) * waterLevelOffset * Mathf.Clamp01(watersBaseElevation - watersMaskThreshold);
@@ -71,7 +72,7 @@ public class HeightMap
 
                 if (x == Mathf.FloorToInt(startLocationMap.circleLocalCenter.x) && y == Mathf.FloorToInt(startLocationMap.circleLocalCenter.y))
                 {
-                    startLocation = new StartLocation(isStartLocation, new Vector3(startLocationMap.circleWorldCenter.x, elevation, startLocationMap.circleWorldCenter.y), edge);
+                    this.startLocation.SpawnPosition = new Vector3(startLocationMap.circleWorldCenter.x, elevation, startLocationMap.circleWorldCenter.y);
                 }
 
                 noiseMap[x, y] = elevation;

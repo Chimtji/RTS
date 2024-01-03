@@ -6,7 +6,13 @@ using System.Linq;
 public class GameSettings : UpdatableData
 {
     [Header("General")]
-    [Header("Players")]
-    public Player[] players;
+
+    [Range(2, 8)]
+    public int amountOfPlayers;
+    public TerrainSettings mapSettings;
+
+    [Header("Player")]
+    public int playerNumber;
+    public Player player;
 
 };

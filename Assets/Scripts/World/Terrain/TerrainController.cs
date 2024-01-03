@@ -1,25 +1,20 @@
-using System.Collections.Generic;
-using Trout.Utils;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class TerrainController : MonoBehaviour, IPointerClickHandler
 {
-    private List<GameObject> uiSelectedContainers
+    private GameObject uiActions
     {
         get
         {
-            string parentContainer = "UI/Layout";
-            string[] containerNames = { parentContainer + "/Actions", parentContainer + "/Information" };
-            List<GameObject> containers = new List<GameObject>();
-
-            foreach (string name in containerNames)
-            {
-                GameObject container = GameObject.Find(name);
-                containers.Add(container);
-            }
-
-            return containers;
+            return gameObject.GetComponent<TerrainShared>().uiManager.actions;
+        }
+    }
+    private GameObject uiInformation
+    {
+        get
+        {
+            return gameObject.GetComponent<TerrainShared>().uiManager.information;
         }
     }
 
@@ -41,15 +36,15 @@ public class TerrainController : MonoBehaviour, IPointerClickHandler
     /// </summary>
     private void UnselectUi()
     {
-        foreach (GameObject container in uiSelectedContainers)
-        {
-            int childCount = container.transform.childCount;
 
-            for (int i = childCount - 1; i >= 0; i--)
-            {
-                GameObject child = container.transform.GetChild(i).gameObject;
-                child.SetActive(false);
-            }
+        foreach (Transform building in uiActions.transform)
+        {
+            building.gameObject.SetActive(false);
+        }
+
+        foreach (Transform building in uiInformation.transform)
+        {
+            building.gameObject.SetActive(false);
         }
     }
 }

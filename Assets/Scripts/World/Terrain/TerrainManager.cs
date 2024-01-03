@@ -1,25 +1,47 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Trout.Utils;
-using UnityEngine.UI;
-using System;
 using Trout.Types;
-using Unity.VisualScripting;
-using UnityEngine.EventSystems;
-using Trout;
 
 public class TerrainManager : Generator
 {
+
     /// <summary>
-    /// The settings used to generate the terrain
+    /// The Game Manager Object in the scene
     /// </summary>
-    public TerrainSettings settings;
-    public GameSettings gameSettings;
+    public GameObject gameManager;
+
+    /// <summary>
+    /// The UI Manager Object in the scene
+    /// </summary>
+    public GameObject uiManager;
 
     /// <summary>
     /// The dictionary that holds each generated chunk
     /// </summary>
     public ChunkMap chunks = new ChunkMap();
+
+    /// <summary>
+    /// The settings used to generate the terrain
+    /// </summary>
+    private TerrainSettings settings
+    {
+        get
+        {
+            return gameManager.GetComponent<GameManager>().settings.mapSettings;
+        }
+    }
+
+    /// <summary>
+    /// The General settings of the game
+    /// </summary>
+    private GameSettings gameSettings
+    {
+        get
+        {
+            return gameManager.GetComponent<GameManager>().settings;
+        }
+    }
 
     private void Update()
     {
@@ -54,9 +76,16 @@ public class TerrainManager : Generator
                 ChunkPosition chunkPosition = new ChunkPosition(x, z);
 
                 ChunkPositionName edgeType = GetEdgeType(x, z);
-                bool isStartLocation = CalcStartLocation(edgeType);
+                StartLocation startLocation = new StartLocation(edgeType, gameSettings.amountOfPlayers, chunkPosition);
 
-                TerrainChunk chunk = new TerrainChunk(chunkPosition, settings, transform, isStartLocation, edgeType);
+                TerrainChunk chunk = new TerrainChunk(chunkPosition, settings, transform, startLocation, edgeType);
+
+                TerrainShared shared = chunk.gameObject.AddComponent<TerrainShared>();
+                shared.terrainManager = this;
+                shared.uiManager = uiManager.GetComponent<UIManager>();
+                shared.gameManager = gameManager.GetComponent<GameManager>();
+
+
                 chunks.Add(chunkPosition, chunk);
             }
         }
@@ -82,7 +111,7 @@ public class TerrainManager : Generator
 
     private int CalcMapSize()
     {
-        int size = gameSettings.players.Length * gameSettings.players.Length;
+        int size = gameSettings.amountOfPlayers * gameSettings.amountOfPlayers;
 
         // Right now we only support 2 - 4 players. We want to support more later.
         if (size > 9)
@@ -92,51 +121,6 @@ public class TerrainManager : Generator
 
         // We just want to know the length of each side
         return Mathf.FloorToInt(Mathf.Sqrt(size));
-    }
-
-    private bool CalcStartLocation(ChunkPositionName edge)
-    {
-        int numOfPlayers = gameSettings.players.Length;
-
-        switch (edge)
-        {
-
-            case ChunkPositionName.Top:
-                return false;
-            case ChunkPositionName.TopLeft:
-                return true;
-            case ChunkPositionName.Right:
-                return false;
-            case ChunkPositionName.TopRight:
-                if (numOfPlayers >= 3)
-                {
-                    return true;
-                }
-                return false;
-            case ChunkPositionName.Bottom:
-                if (numOfPlayers == 3)
-                {
-                    return true;
-                }
-                return false;
-            case ChunkPositionName.BottomLeft:
-                if (numOfPlayers == 4)
-                {
-                    return true;
-                }
-                return false;
-            case ChunkPositionName.BottomRight:
-                if (numOfPlayers == 2 || numOfPlayers == 4)
-                {
-                    return true;
-                }
-                return false;
-            case ChunkPositionName.Left:
-                return false;
-            default:
-                Debug.LogError("Invalid edge position specified.");
-                return false;
-        }
     }
 
     private ChunkPositionName GetEdgeType(int x, int z)

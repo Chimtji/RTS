@@ -56,7 +56,6 @@ public class Grid
                 Tile tile = tilesList[index];
                 tile.coordinate = new Vector2(x, z);
                 Vector2 position = new Vector2(tile.position.x, tile.position.z);
-                // Debug.Log(position);
                 tiles.Add(position, tile);
                 index++;
             }
@@ -106,7 +105,6 @@ public class Grid
 
     private void debugGrid()
     {
-        Debug.Log("debug");
         GameObject gridDebug = new GameObject("Grid");
         gridDebug.transform.parent = GameObject.Find("DebugContainer").transform;
 

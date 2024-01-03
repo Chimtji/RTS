@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 906d3b2449cf64af7ab614b092296249, type: 3}
+  m_Name: Barracks
+  m_EditorClassIdentifier: 
+  name: Barracks
+  description: 
+  visual: {fileID: 3972600416435453613, guid: 2eeea6a877c8444a795c4c156c1999cb, type: 3}
+  width: 4
+  height: 4
+  health: 150
+  cost: 0
+  image: {fileID: 0}
+  tooltip: 
+  buildActions:
+  - {fileID: 11400000}

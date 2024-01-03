@@ -1,0 +1,363 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6aa674c7030b43799afd33f51a72539, type: 3}
+  m_Name: Default Terrain Settings
+  m_EditorClassIdentifier: 
+  autoUpdate: 1
+  scale: 1
+  meshSize: 97
+  material: {fileID: 2100000, guid: ec39889a8cf3741de9c2bb61a4a102a8, type: 2}
+  heightMapSettings:
+    ground:
+    - enabled: 1
+      settings:
+        filterType: 0
+        persistance: 0.352
+        strength: 1.06
+        roughness: 3.23
+        baseRoughness: 0.85
+        layers: 5
+        threshold: 1.69
+        depth: 1
+        seed: 0
+        offset: {x: 0, y: 0}
+        radius: 38.2
+        amount: 2
+        rotation: 0
+        heightCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        distance: 25.4
+    mountains:
+    - enabled: 1
+      settings:
+        filterType: 0
+        persistance: 0.352
+        strength: 1.03
+        roughness: 2.82
+        baseRoughness: 2.11
+        layers: 5
+        threshold: 0.71
+        depth: 2.32
+        seed: 0
+        offset: {x: 50, y: 50}
+        radius: 20
+        amount: 2
+        rotation: 0
+        heightCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        distance: 0
+    - enabled: 1
+      settings:
+        filterType: 1
+        persistance: 0.519
+        strength: 2.26
+        roughness: 8.18
+        baseRoughness: 2.59
+        layers: 5
+        threshold: 0.5
+        depth: 1
+        seed: 0
+        offset: {x: 50, y: 50}
+        radius: 20
+        amount: 2
+        rotation: 0
+        heightCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        distance: 0
+    waters:
+    - enabled: 1
+      settings:
+        filterType: 0
+        persistance: 0.46
+        strength: 1.97
+        roughness: 1.95
+        baseRoughness: 1.92
+        layers: 5
+        threshold: 2.4
+        depth: 0.91
+        seed: 0
+        offset: {x: 0, y: 0}
+        radius: 20
+        amount: 2
+        rotation: 0
+        heightCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        distance: 0
+    - enabled: 1
+      settings:
+        filterType: 1
+        persistance: 0.675
+        strength: 1.04
+        roughness: 3.61
+        baseRoughness: 10.29
+        layers: 5
+        threshold: 0.83
+        depth: 0
+        seed: 0
+        offset: {x: 0, y: 0}
+        radius: 20
+        amount: 2
+        rotation: 0
+        heightCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        distance: 0
+    startLocation:
+    - enabled: 1
+      settings:
+        filterType: 2
+        persistance: 0.485
+        strength: 3
+        roughness: 0.63
+        baseRoughness: 0.36
+        layers: 4
+        threshold: 0.5
+        depth: 1
+        seed: 0
+        offset: {x: 0, y: 0}
+        radius: 20.2
+        amount: 0
+        rotation: 0
+        heightCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 2
+            outSlope: 2
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        distance: 11.7
+  waterPrefab: {fileID: 5163682490895930026, guid: 61f7ea9adfb5b4563b35911e2468d465, type: 3}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  waterMinHeight: 1.33
+  waterMaxHeight: 0.95
+  groundMinHeight: 0.93
+  groundMaxHeight: 4.23
+  mountainMinHeight: 4.35
+  mountainMaxHeight: 11.3
+  treePrefab: {fileID: 1925185884874842, guid: 22f7f929c4c6d4413ad3734f8602816f, type: 3}
+  treeMaxHeight: 6.11
+  treeMinHeight: 1.46
+  treeNoiseMax: 2.23
+  treeNoiseMin: 1.38
+  treesHeightMapSettings:
+    ground:
+    - enabled: 1
+      settings:
+        filterType: 0
+        persistance: 0.6
+        strength: 1
+        roughness: 2
+        baseRoughness: 1
+        layers: 1
+        threshold: 0.5
+        depth: 1
+        seed: 0
+        offset: {x: 0, y: 0}
+        radius: 20
+        amount: 2
+        rotation: 0
+        heightCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        distance: 0
+    - enabled: 1
+      settings:
+        filterType: 0
+        persistance: 0.6
+        strength: 1
+        roughness: 2
+        baseRoughness: 1
+        layers: 1
+        threshold: 0.5
+        depth: 1
+        seed: 0
+        offset: {x: 0, y: 0}
+        radius: 20
+        amount: 2
+        rotation: 0
+        heightCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        distance: 0
+    mountains: []
+    waters: []
+    startLocation: []

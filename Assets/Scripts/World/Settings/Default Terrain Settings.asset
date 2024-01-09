@@ -16,6 +16,9 @@ MonoBehaviour:
   scale: 1
   meshSize: 97
   material: {fileID: 2100000, guid: ec39889a8cf3741de9c2bb61a4a102a8, type: 2}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8
   heightMapSettings:
     ground:
     - enabled: 1
@@ -262,9 +265,6 @@ MonoBehaviour:
           m_RotationOrder: 0
         distance: 11.7
   waterPrefab: {fileID: 5163682490895930026, guid: 61f7ea9adfb5b4563b35911e2468d465, type: 3}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 0
   waterMinHeight: 1.33
   waterMaxHeight: 0.95
   groundMinHeight: 0.93

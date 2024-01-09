@@ -1,15 +1,35 @@
+using System.Collections.Generic;
 using Trout.Utils;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
 
-    public GameObject buildings;
-    public GameObject units;
+    [SerializeField]
+    private GameObject buildingsContainer;
+    [SerializeField]
+    private GameObject unitsContainer;
+
+    public List<GameObject> buildings;
+    public List<GameObject> units;
+
+    public void AddBuilding(GameObject building)
+    {
+        buildings.Add(building);
+        building.transform.SetParent(buildingsContainer.transform);
+    }
+    public void AddUnit(GameObject unit)
+    {
+        units.Add(unit);
+        unit.transform.SetParent(unitsContainer.transform);
+    }
 
     public void ClearAll()
     {
-        Utils.ClearChildren(buildings);
-        Utils.ClearChildren(units);
+        // units.Clear();
+        buildings.Clear();
+
+        Utils.ClearChildren(buildingsContainer);
+        // Utils.ClearChildren(unitsContainer);
     }
 }

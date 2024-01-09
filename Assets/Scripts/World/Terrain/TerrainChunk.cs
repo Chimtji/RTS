@@ -90,16 +90,16 @@ public class TerrainChunk
         gameObject = new GameObject("Terrain Chunk");
         gameObject.transform.parent = container.transform;
         gameObject.transform.position = worldPosition;
-        gameObject.layer = settings.layerMask.value;
+        gameObject.layer = Utils.LayerMaskToLayer(settings.layerMask);
         gameObject.AddComponent<TerrainController>();
 
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
         meshRenderer.sharedMaterial = settings.material;
 
         MeshFilter meshFilter = gameObject.AddComponent<MeshFilter>();
-        MeshCollider meshCollider = gameObject.AddComponent<MeshCollider>();
-
         meshFilter.sharedMesh = mesh;
+
+        MeshCollider meshCollider = gameObject.AddComponent<MeshCollider>();
 
         // Utils.ClearChildren(GameObject.Find("DebugContainer"));
 

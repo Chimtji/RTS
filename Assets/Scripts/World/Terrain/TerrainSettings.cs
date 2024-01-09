@@ -28,13 +28,13 @@ public class TerrainSettings : UpdatableData
     /// The material set on the mesh
     /// </summary>
     public Material material;
+    public LayerMask layerMask;
 
     [Header("Height Settings")]
     public HeightMapSettings heightMapSettings;
 
     [Header("Water")]
     public GameObject waterPrefab;
-    public LayerMask layerMask;
 
     [Header("Area Heights")]
     public float waterMinHeight;

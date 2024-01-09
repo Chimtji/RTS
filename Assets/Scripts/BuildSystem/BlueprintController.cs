@@ -118,8 +118,8 @@ public class BlueprintController : MonoBehaviour
         collider = new GameObject("Collider");
 
         TriggerListener triggerListener = collider.AddComponent<TriggerListener>();
-        triggerListener.triggerEnterEvent.AddListener(() => { isColliding = true; });
-        triggerListener.triggerExitEvent.AddListener(() => { isColliding = false; });
+        triggerListener.triggerEnterEvent.AddListener(collider => { isColliding = true; });
+        triggerListener.triggerExitEvent.AddListener(collider => { isColliding = false; });
 
         collider.AddComponent<BoxCollider>();
         collider.transform.parent = transform;

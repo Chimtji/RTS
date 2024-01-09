@@ -32,6 +32,7 @@ public class BuildingController : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData data)
     {
+        Debug.Log("clicked");
         foreach (Transform child in uiActionsContainer.transform)
         {
             child.gameObject.SetActive(false);

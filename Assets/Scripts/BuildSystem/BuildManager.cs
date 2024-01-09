@@ -166,10 +166,9 @@ public class BuildManager : MonoBehaviour
             return;
         }
 
-        GameObject container = dataManager.GetComponent<DataManager>().buildings;
-
         GameObject buildingObject = new GameObject(buildingData.name);
-        buildingObject.transform.SetParent(container.transform);
+        dataManager.GetComponent<DataManager>().AddBuilding(buildingObject);
+
         BuildingShared buildingShared = buildingObject.AddComponent<BuildingShared>();
 
         buildingShared.owner = player;

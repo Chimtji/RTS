@@ -22,7 +22,4 @@ MonoBehaviour:
   image: {fileID: 0}
   tooltip: 
   buildActions:
-  - {fileID: 11400000}
-  - {fileID: 11400000, guid: 867473627567f45d2a597017c24941e5, type: 2}
-  - {fileID: 11400000, guid: 8d6df96e51d2c4a52b75c170d361b8a6, type: 2}
-  - {fileID: 11400000, guid: d44ea5ef8bca746fc92557af50078059, type: 2}
+  - {fileID: 11400000, guid: e94be432d702642e3a870cba8116ffe9, type: 2}

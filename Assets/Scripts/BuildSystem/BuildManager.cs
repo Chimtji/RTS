@@ -19,6 +19,11 @@ public class BuildManager : MonoBehaviour
     public GameObject dataManager;
 
     /// <summary>
+    /// The Unit Manager object in the scene
+    /// </summary>
+    public GameObject unitManager;
+
+    /// <summary>
     /// The UI Manager object in the scene
     /// </summary>
     public GameObject uiManager;
@@ -128,7 +133,9 @@ public class BuildManager : MonoBehaviour
         this.buildingData = buildingData;
         CreateBuildingObject();
 
-        GameObject visual = Instantiate(buildingData.visual, position, Quaternion.identity, building.transform);
+        building.transform.position = position;
+        GameObject visual = Instantiate(buildingData.visual, Vector3.zero, Quaternion.identity, building.transform);
+        visual.transform.localPosition = new Vector3(0, 0, 0);
         visual.name = "prefab";
 
         building.AddComponent<BuildingController>();
@@ -178,6 +185,7 @@ public class BuildManager : MonoBehaviour
         buildingShared.blueprintGridMaterial = blueprintGridMaterial;
         buildingShared.blueprintMaterial = blueprintMaterial;
         buildingShared.builder = this;
+        buildingShared.trainer = unitManager.GetComponent<UnitManager>();
         buildingShared.uiActionsContainer = uiManager.GetComponent<UIManager>().actions;
         buildingShared.uiInformationContainer = uiManager.GetComponent<UIManager>().information;
 

@@ -22,10 +22,4 @@ public class UnitController : MonoBehaviour
         data.AddUnit(this.gameObject);
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

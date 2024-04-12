@@ -458,7 +458,6 @@ GameObject:
   - component: {fileID: 95787105524477528}
   - component: {fileID: 472973588212817782}
   - component: {fileID: 4562385096727131210}
-  - component: {fileID: 3637681709860903455}
   m_Layer: 7
   m_Name: Villager
   m_TagString: Untagged
@@ -533,18 +532,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3637681709860903455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1316981293597076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bc7174e212e9491fbb05cb96316e4bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1326360802897878
 GameObject:
   m_ObjectHideFlags: 0

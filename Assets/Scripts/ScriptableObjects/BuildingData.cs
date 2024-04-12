@@ -28,5 +28,5 @@ public class BuildingData : ScriptableObject
     public string tooltip;
 
     [Header("Actions")]
-    public BuildingData[] buildActions;
+    public UnitData[] buildActions;
 }

@@ -19,7 +19,7 @@ public class BoxSelection : MonoBehaviour
 
         TriggerListener trigger = container.AddComponent<TriggerListener>();
         // trigger.triggerEnterEvent.AddListener(collider => Add(collider.gameObject));
-        trigger.triggerAllEvent.AddListener(colliders => Add(colliders));
+        // trigger.triggerAllEvent.AddListener(colliders => Add(colliders));
     }
     private void OnGUI()
     {

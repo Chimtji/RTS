@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class BuildingShared : MonoBehaviour
 {
     public BuildManager builder;
+    public UnitManager trainer;
     public Player owner;
     public BuildingData attributes;
     public InputManager input;

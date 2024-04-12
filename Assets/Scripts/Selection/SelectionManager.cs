@@ -9,8 +9,8 @@ public class SelectionManager : MonoBehaviour
     {
         DeselectAll();
         selected.Add(item);
+        AddSelectionVisual(item);
 
-        // Add selected visual logic here
     }
     public void AddSelect(GameObject item)
     {
@@ -28,16 +28,34 @@ public class SelectionManager : MonoBehaviour
         if (!selected.Contains(item))
         {
             selected.Add(item);
+            AddSelectionVisual(item);
+
         }
     }
 
     public void Deselect(GameObject item)
     {
-
+        selected.Remove(item);
+        RemoveSelectionVisual(item);
     }
 
     public void DeselectAll()
     {
+        foreach (GameObject item in selected)
+        {
+            RemoveSelectionVisual(item);
+        }
         selected.Clear();
+    }
+
+    private void AddSelectionVisual(GameObject item)
+    {
+        // Testing
+        item.transform.Find("Model").GetComponent<Renderer>().material.color = Color.red;
+    }
+    private void RemoveSelectionVisual(GameObject item)
+    {
+        // Testing
+        item.transform.Find("Model").GetComponent<Renderer>().material.color = Color.white;
     }
 }

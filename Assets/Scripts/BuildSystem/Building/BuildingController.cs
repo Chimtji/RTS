@@ -11,6 +11,7 @@ public class BuildingController : MonoBehaviour, IPointerClickHandler
     public GameObject uiActions;
     public GameObject uiActionsContainer;
     public BuildManager builder;
+    public UnitManager trainer;
     public Player owner;
 
     void Awake()
@@ -20,19 +21,20 @@ public class BuildingController : MonoBehaviour, IPointerClickHandler
         this.attributes = shared.attributes;
         this.uiActionsContainer = shared.uiActionsContainer;
         this.builder = shared.builder;
+        this.trainer = shared.trainer;
         CreateUiActions();
     }
 
     // @TODO: Create validation, so you can't build whatever building sent to this method, but only the ones
     // that are available in attributes.
-    public void Build(BuildingData data)
+    public void Train(UnitData data)
     {
-        builder.Select(data);
+        Vector3 spawnPosition = new Vector3(gameObject.transform.position.x - 5, gameObject.transform.position.y + 2, gameObject.transform.position.z - 5);
+        trainer.Create(data, spawnPosition);
     }
 
     public void OnPointerClick(PointerEventData data)
     {
-        Debug.Log("clicked");
         foreach (Transform child in uiActionsContainer.transform)
         {
             child.gameObject.SetActive(false);
@@ -79,16 +81,16 @@ public class BuildingController : MonoBehaviour, IPointerClickHandler
         gridLayout.padding.right = 5;
         gridLayout.spacing = new Vector2(5, 5);
 
-        foreach (BuildingData buildingData in attributes.buildActions)
+        foreach (UnitData unitData in attributes.buildActions)
         {
-            GameObject button = new GameObject(buildingData.name);
+            GameObject button = new GameObject(unitData.name);
             button.transform.SetParent(layout.transform);
             button.AddComponent<CanvasRenderer>();
             button.AddComponent<Image>();
             Button buttonComp = button.AddComponent<Button>();
             button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
 
-            buttonComp.onClick.AddListener(() => Build(buildingData));
+            buttonComp.onClick.AddListener(() => Train(unitData));
         }
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 
